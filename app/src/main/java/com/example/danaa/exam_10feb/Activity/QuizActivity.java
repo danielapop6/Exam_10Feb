@@ -1,5 +1,6 @@
 package com.example.danaa.exam_10feb.Activity;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.danaa.exam_10feb.MainActivity;
+import com.example.danaa.exam_10feb.Model.Answer;
 import com.example.danaa.exam_10feb.Model.Question;
 import com.example.danaa.exam_10feb.Model.Quiz;
 import com.example.danaa.exam_10feb.R;
@@ -51,7 +54,7 @@ public class QuizActivity extends AppCompatActivity {
         questionToShow = questions.get(currentQuestion); // SETEZ PRIMA INTREBARE
         questionView.setText(questionToShow.getText());
 
-        countDownTimer = new CountDownTimer(6000, 100) {
+        countDownTimer = new CountDownTimer(10000, 100) {
 
             public void onTick(long millisUntilFinished) {
                 long time = millisUntilFinished / 1000;
@@ -65,7 +68,7 @@ public class QuizActivity extends AppCompatActivity {
         };
         countDownTimer.start();
 
-        nextButton.setOnClickListener(v -> {//CAND DA CLICK
+        nextButton.setOnClickListener(v -> {
             countDownTimer.cancel();
             nextButton();
         });
@@ -74,28 +77,32 @@ public class QuizActivity extends AppCompatActivity {
 
     private void nextButton() {
 
-        addToQuiz(questionToShow.getId(), answerText.getText().toString()); //salvez raspunsul curent
-        currentQuestion++;                                                 //trec la urmatoarea intrebare
+        addToQuiz(questionToShow.getId(), answerText.getText().toString());
+        currentQuestion++;
         nextButtonHandler(currentQuestion);
     }
 
     private void addToQuiz(Integer id, String answer) {
-        quiz.add(id, answer);
+        Answer answer1 = new Answer(id,answer);
+        quiz.add(answer1);
     }
 
     private void nextButtonHandler(Integer questionNumber) {
 
 
-        if (currentQuestion < questions.size()) { //daca mai am intrebari
+        if (currentQuestion < questions.size()) {
 
             questionToShow = questions.get(questionNumber);
-            questionView.setText(questionToShow.getText());//SETEZ TEXTUL
+            questionView.setText(questionToShow.getText());
 
             countDownTimer.start();
         }
         else{
+            Intent intent = new Intent(QuizActivity.this,FinishActivity.class);
             nextButton.setEnabled(false);
-            ///start new activity
+
+            intent.putExtra("quiz", quiz);
+            startActivity(intent);
         }
     }
 }

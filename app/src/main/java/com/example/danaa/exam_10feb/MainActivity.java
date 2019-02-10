@@ -3,9 +3,8 @@ package com.example.danaa.exam_10feb;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -14,7 +13,6 @@ import com.example.danaa.exam_10feb.Model.Question;
 import com.example.danaa.exam_10feb.Remote.DataClient;
 import com.example.danaa.exam_10feb.Remote.RetrofitUtils;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 

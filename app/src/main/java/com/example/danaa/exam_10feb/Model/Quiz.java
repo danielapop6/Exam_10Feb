@@ -1,24 +1,27 @@
 package com.example.danaa.exam_10feb.Model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class Quiz {
+public class Quiz implements Serializable {
 
-    private HashMap<Integer, String> answers;
+    private List<Answer> answers;
 
     public Quiz() {
-        this.answers = new HashMap<>();
+        this.answers = new ArrayList<>();
     }
 
-    public HashMap<Integer, String> getAnswers() {
+    public List<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(HashMap<Integer, String> answers) {
+    public void setAnswers(List<Answer> answers) {
         this.answers = answers;
     }
 
-    public void add(Integer id, String answer) {
-        answers.put(id, answer);
+    public void add(Answer answer) {
+        answers.add(answer);
     }
 }
